@@ -1,0 +1,6 @@
+{
+    "canvas_id" : "sj-canvas",
+    "redner" : "h4renderer",
+    "loader" : "sjloader",
+    "fps" : 20
+}

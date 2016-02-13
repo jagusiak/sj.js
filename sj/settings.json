@@ -1,0 +1,32 @@
+{
+    "configuration": {
+        "canvas" : {
+            "scope" : "FULL",
+            "file" : "canvas"
+        },
+        "texture" : {
+            "scope" : "APP",
+            "file" : "texture"
+        },
+        "sound" : {
+            "scope" : "APP",
+            "file" : "sound"
+        }
+    },
+    "modules" : {
+        "utils" : "sj/modules/utils",
+        "h4render" : "sj/modules/h4render",
+        "texture" : "sj/modules/texture",
+        "canvasobject" : "sj/modules/canvasobject",
+        "scene" : "sj/modules/scene",
+        "canvas" : "sj/modules/canvas",
+        "sound" : "sj/modules/sound",
+        "input" : "sj/modules/input",
+        "default" : "sj/modules/default",
+        "loader" : "sj/modules/loader"
+    },
+    "init" : {
+        "module" : "default",
+        "action" : "start"
+    }
+}
