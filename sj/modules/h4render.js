@@ -71,7 +71,7 @@ window.SJ.module('h4render', function (sj) {
         /**
          * Starts rendering scene
          *
-         * @param {Scene} scene
+         * @param {SJScene} scene
          */
         start: function (scene) {
             for (var i in scene.objects) {
@@ -91,7 +91,7 @@ window.SJ.module('h4render', function (sj) {
         /**
          * Stops rendering scene
          *
-         * @param {Scene} scene
+         * @param {SJScene} scene
          */
         stop: function (scene) {
             scene.started = false;
@@ -112,7 +112,7 @@ window.SJ.module('h4render', function (sj) {
         /**
          * Renders single frame
          *
-         * @param {Scene} scene
+         * @param {SJScene} scene
          */
         frame: function (scene) {
             if (scene.started) {

@@ -7,7 +7,8 @@ window.SJ.module('canvas', function(sj) {
         runningScene, // current running scene - one in the momemnt - stores name of scene - not object
         runThread = false, // determines if thread is running
         render, // renderer object
-        element = document.getElementById(sj.config('canvas', 'canvas_id')); // canvas html element (DOM)
+        element = document.getElementById(sj.config('canvas', 'canvas_id')), // canvas html element (DOM)
+        loaderName = sj.config('canvas', 'loader') || 'loader';
 
     /**
      * Thread function -  it is run in loop
@@ -57,7 +58,7 @@ window.SJ.module('canvas', function(sj) {
          *
          * @param {String} name Scene name
          * @param {Object|undefined} data Scene data - it allows to create ready scene from scene config
-         * @returns {Scene}
+         * @returns {SJScene}
          */
         createScene : function(name, data) {
             // handles situation when scene with given name exists
@@ -75,9 +76,12 @@ window.SJ.module('canvas', function(sj) {
          */
         loadScene : function(name) {
             // get scene
-            var scene = scenes[name];
-            // set loader - show initali screen
-            sj.loader.start(element);
+            var scene = scenes[name],
+            // get loader
+            loader = sj.canvas.getLoader();
+
+            // set loader - show initaial screen
+            loader.start(element);
 
             // handle non existing scene
             if (!scene) {
@@ -92,14 +96,14 @@ window.SJ.module('canvas', function(sj) {
                 if (scene.onStop) {
                     scene.onStop();
                     // set loader progress
-                    sj.loader.progress(element, 25);
+                    loader.progress(element, 25);
                 }
                 // stop scene - framework acrion
                 scene.stop();
             }
 
             // mark progress
-            sj.loader.progress(element, 50);
+            loader.progress(element, 50);
 
             // store running scene name
             runningScene = name;
@@ -110,12 +114,12 @@ window.SJ.module('canvas', function(sj) {
             if(scene.onStart) {
                 scene.onStart();
                 // mark progress
-                sj.loader.progress(element, 75);
+                loader.progress(element, 75);
             }
             // mark final progress
-            sj.loader.progress(element, 100);
+            loader.progress(element, 100);
             // finish loader actions
-            sj.loader.finish(element, scene.start);
+            loader.finish(element, scene.start);
         },
         /**
          * Reloads the same scene - all loading process is performed again
@@ -182,6 +186,13 @@ window.SJ.module('canvas', function(sj) {
          */
         getCanvas : function() {
             return element;
+        },
+        /**
+         * Returns loader
+         * @return {Object} loader object
+         */
+        getLoader : function() {
+            return sj[loaderName];
         }
     };
 });

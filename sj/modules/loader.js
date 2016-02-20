@@ -50,7 +50,7 @@ window.SJ.module('loader', function(sj) {
         /**
          * Marks finish
          * @param  {CanvasObject} canvas Canvas object to watch progress
-         * @param  {Function} callback Mark function finish 
+         * @param  {Function} callback Mark function finish
          */
         finish: function(canvas, callback) {
             setTimeout(function() {

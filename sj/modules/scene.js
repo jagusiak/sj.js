@@ -135,7 +135,7 @@ window.SJ.module('scene', function (sj) {
          * Creates new scene
          * @param  {[type]} render [description]
          * @param  {[type]} data   [description]
-         * @return {Scene}        [description]
+         * @return {SJScene}        [description]
          */
         create: function (render, data) {
             return new SJScene(render, data);

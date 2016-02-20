@@ -14,12 +14,7 @@ window.SJ.module('input', function(sj) {
      */
     function attachKeyEvent(eventName, listener, preventDefault) {
         var currentListener = listeners[eventName];
-        if (currentListener) {
-            // remove previous listener
-            document.removeEventListener(eventName, currentListener);
-            // dispose previous listener
-            delete listeners[eventName];
-        }
+        detachKeyEvent(eventName);
         listeners[eventName] = listener;
         document.addEventListener(eventName, function(event) {
             if (preventDefault) {
@@ -36,12 +31,7 @@ window.SJ.module('input', function(sj) {
      */
     function attachMouseEvent(eventName, listener, preventDefault) {
         var currentListener = listeners[eventName];
-        if (currentListener) {
-            // remove previous listener
-            canvas.removeEventListener(eventName, currentListener);
-            // dispose previous listener
-            delete listeners[eventName];
-        }
+        detachMouseEvent(eventName);
         listeners[eventName] = listener;
         canvas.addEventListener(eventName, function(event) {
             if (preventDefault) {
@@ -49,6 +39,36 @@ window.SJ.module('input', function(sj) {
             }
             listener((event.pageX - canvas.offsetLeft )/ratioX, (event.pageY - canvas.offsetTop)/ratioY);
         });
+    }
+
+    /**
+     * Detaches event with given name
+     * @param  {String} eventName
+     * @param  {Object} DOM element
+     */
+    function detachMouseEvent(eventName) {
+        var currentListener = listeners[eventName];
+        if (currentListener) {
+            // remove previous listener
+            canvas.removeEventListener(eventName, currentListener);
+            // dispose previous listener
+            delete listeners[eventName];
+        }
+    }
+
+    /**
+     * Detaches event with given name
+     * @param  {String} eventName
+     * @param  {Object} DOM element
+     */
+    function detachKeyEvent(eventName) {
+        var currentListener = listeners[eventName];
+        if (currentListener) {
+            // remove previous listener
+            document.removeEventListener(eventName, currentListener);
+            // dispose previous listener
+            delete listeners[eventName];
+        }
     }
 
     return {
@@ -74,6 +94,18 @@ window.SJ.module('input', function(sj) {
         },
         onMouseClick : function(listner, preventDefault) {
             attachMouseEvent('click', listner, preventDefault);
+        },
+        clearKeyDown : function() {
+            detachKeyEvent('keydown');
+        },
+        clearKeyUp : function() {
+            detachKeyEvent('keyup');
+        },
+        clearMouseMove : function() {
+            detachMouseEvent('mousemove');
+        },
+        clearMouseClick : function() {
+            detachMouseEvent('click');
         }
     };
 });
