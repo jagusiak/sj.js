@@ -46,11 +46,23 @@ window.SJ.module('h4render', function (sj) {
     function setTexture(object) {
         var bgWidth = 100.0 / (object.textureRight - object.textureLeft),
                 bgHeight = 100.0 / (object.textureBottom - object.textureTop),
-                div = object.rh4;
+                div = object.rh4,
+                posX = (bgWidth == 100 ? 100 * object.textureLeft : (object.textureLeft/(1-((object.textureRight - object.textureLeft)))*100)),
+                posY = (bgHeight == 100 ? 100 * object.textureTop : (object.textureTop/(1-((object.textureBottom - object.textureTop)))*100));
         div.style.backgroundImage = "url('" + object.texture.image.src + "')";
         div.style.backgroundSize = bgWidth + "% " + bgHeight + "%";
-        div.style.backgroundPosition = bgWidth * object.textureLeft + "% " + bgHeight * object.textureTop + "%";
+        div.style.backgroundPosition = posX + "% " + posY + "%";
         object.textured = false;
+    }
+
+    /**
+     * Sets object visibility
+     *
+     * @param {CanvasObject} object
+     */
+    function setVisibility(object) {
+        object.rh4.style.display = object.visible ? 'block' : 'none';
+        object.rotated = false;
     }
 
     return {
@@ -85,6 +97,7 @@ window.SJ.module('h4render', function (sj) {
                 setDimension(object);
                 setRotation(object);
                 setTexture(object);
+                setVisibility(object);
             }
             scene.started = true;
         },
@@ -129,6 +142,9 @@ window.SJ.module('h4render', function (sj) {
                     }
                     if (object.scaled) {
                         setDimension(object);
+                    }
+                    if (object.displayed) {
+                        setVisibility(object);
                     }
                 }
             }

@@ -23,6 +23,7 @@ window.SJ.module('canvasobject', function (sj) {
         this.y = 0;
         this.z = 1; // this one is for depth
 
+        this.visible = true;
         /**
          * Sets element position
          *
@@ -49,6 +50,17 @@ window.SJ.module('canvasobject', function (sj) {
             this.height = h;
             // notify about changed dimensions
             object.scaled = true;
+        };
+
+        /**
+         * Sets object visibility
+         *
+         * @param {Boolean} v Object visibility
+         */
+        this.setVisible = function (v) {
+            object.visible = v;
+            // notify about changed visiblity
+            object.displayed = true;
         };
 
         /**

@@ -15,13 +15,13 @@ window.SJ.module('input', function(sj) {
     function attachKeyEvent(eventName, listener, preventDefault) {
         var currentListener = listeners[eventName];
         detachKeyEvent(eventName);
-        listeners[eventName] = listener;
-        document.addEventListener(eventName, function(event) {
+        listeners[eventName] = function(event) {
             if (preventDefault) {
                 event.preventDefault();
             }
             listener(event.keyCode);
-        });
+        };
+        document.addEventListener(eventName, listeners[eventName]);
     }
     /**
     * Attaches event related to mouse actions, ie: move, clicl
@@ -32,13 +32,13 @@ window.SJ.module('input', function(sj) {
     function attachMouseEvent(eventName, listener, preventDefault) {
         var currentListener = listeners[eventName];
         detachMouseEvent(eventName);
-        listeners[eventName] = listener;
-        canvas.addEventListener(eventName, function(event) {
+        listeners[eventName] = function(event) {
             if (preventDefault) {
                 event.preventDefault();
             }
             listener((event.pageX - canvas.offsetLeft )/ratioX, (event.pageY - canvas.offsetTop)/ratioY);
-        });
+        };
+        canvas.addEventListener(eventName, listeners[eventName]);
     }
 
     /**
@@ -83,6 +83,7 @@ window.SJ.module('input', function(sj) {
         KEY_UP : 38,
         KEY_RIGHT : 39,
         KEY_DOWN : 40,
+
         onKeyDown : function(listener, preventDefault) {
             attachKeyEvent('keydown', listener, preventDefault);
         },

@@ -22,6 +22,7 @@
         "canvas" : "sj/modules/canvas",
         "sound" : "sj/modules/sound",
         "input" : "sj/modules/input",
+        "animation" : "sj/modules/animation",
         "default" : "sj/modules/default",
         "loader" : "sj/modules/loader"
     },
