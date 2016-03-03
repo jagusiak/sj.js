@@ -56,17 +56,17 @@ def merge():
         global appName
         if scope == "APP" :
             with open(appName + '/config/' + file + '.json') as data_file:
-                return json.load(data_file)
+                return json.load(data_file, object_pairs_hook=OrderedDict)
         elif scope == "FULL" :
             try:
                 with open(appName + '/config/' + file + '.json') as data_file:
-                    data = json.load(data_file)
+                    data = json.load(data_file, object_pairs_hook=OrderedDict)
                     if len(data) == 0:
                         raise Exception("Empty config")
                     return data
             except Exception:
                 with open('sj/config/' + file + '.json') as data_file:
-                    return json.load(data_file)
+                    return json.load(data_file, object_pairs_hook=OrderedDict)
         else:
             with open('sj/config/' + file + '.json') as data_file:
                 return json.load(data_file)
