@@ -2,18 +2,18 @@ window.SJ.module('animationstates', function(sj) {
     "use strict";
     var animationStates = {},
     SJAnimationStates = function (s, t) {
-        var states, transitions, currentState, animationStates = this;
+        var states= {}, transitions = {}, currentState, animationStates = this;
 
         animationStates.addState = function(name, animation) {
             if (states[name]) {
                 throw new Error("Animation state with name '" + name + "' already exists");
             }
 
+            states[name] = animation;
+
             if (!currentState) {
                 animationStates.setState(name);
             }
-
-            states[name] = animation;
         };
 
         animationStates.addStates = function(data) {
@@ -49,16 +49,22 @@ window.SJ.module('animationstates', function(sj) {
             states[name].setCurrentFrame(frame || 0);
         };
 
+        animationStates.getState = function(name, frame) {
+            return currentState;
+        };
+
         animationStates.play = function(object) {
             var currentAnimation = states[currentState];
             if(currentAnimation.hasStopped()) {
+
                 var newState = transitions[currentState];
                 if (newState) {
-                    animationStates.setState(currentState);
+                    animationStates.setState(newState);
                     currentAnimation = states[newState];
                 }
+
             }
-            currentAnimation.play();
+            currentAnimation.play(object);
         };
 
         animationStates.addStates(s || {});

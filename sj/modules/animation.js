@@ -3,7 +3,6 @@ window.SJ.module('animation', function(sj) {
     var animations = {},
     SJAnimation = function() {
         var animation = this,
-            object = o,
             step = 1,
             currentStep = 0,
             currentFrame = 0,
@@ -30,7 +29,7 @@ window.SJ.module('animation', function(sj) {
         };
 
         animation.setCurrentFrame = function (f) {
-            currentFrame = f | 0;
+            currentFrame = f | -1;
             currentStep = f*step;
             stopped = false;
         };
@@ -53,7 +52,7 @@ window.SJ.module('animation', function(sj) {
             return stopped;
         };
     };
-    
+
     return {
         create: function(name) {
             if (animations[name]) {
