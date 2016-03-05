@@ -1,0 +1,11 @@
+{
+    "modules": {
+        "test_animation": "APP_NAME/modules/test_animation"
+    },
+    "configuration": {
+    },
+    "init": {
+        "module": "test_animation",
+        "action": "init"
+    }
+}
