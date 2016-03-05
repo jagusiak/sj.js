@@ -1,7 +1,7 @@
 window.SJ.module('animation', function(sj) {
     "use strict";
-
-    function SJAnimation(o) {
+    var animations = {},
+    SJAnimation = function() {
         var animation = this,
             object = o,
             step = 1,
@@ -35,7 +35,7 @@ window.SJ.module('animation', function(sj) {
             stopped = false;
         };
 
-        animation.play = function (s) {
+        animation.play = function (object) {
             var nextFrame = Math.floor(currentStep/step);
             if (nextFrame !== currentFrame) {
                 if (nextFrame < frames.length || loopped) {
@@ -52,12 +52,21 @@ window.SJ.module('animation', function(sj) {
         animation.hasStopped = function () {
             return stopped;
         };
-
-    }
-
+    };
+    
     return {
-        create: function(object) {
-            return new SJAnimation(object);
+        create: function(name) {
+            if (animations[name]) {
+                throw new Error("Animation with name '" + name +  "' already exists");
+            }
+            animations[name] = new SJAnimation();
+            return animations[name];
+        },
+        destroy : function(name) {
+            delete animations[name];
+        },
+        get : function(name) {
+            return animations[name];
         }
     };
 

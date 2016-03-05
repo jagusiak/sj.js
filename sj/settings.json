@@ -23,6 +23,7 @@
         "sound" : "sj/modules/sound",
         "input" : "sj/modules/input",
         "animation" : "sj/modules/animation",
+        "animationstates" : "sj/modules/animationstates",
         "default" : "sj/modules/default",
         "loader" : "sj/modules/loader"
     },
