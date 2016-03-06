@@ -2,7 +2,7 @@ window.SJ.module('animationstates', function(sj) {
     "use strict";
     var animationStates = {},
     SJAnimationStates = function (s, t) {
-        var states= {}, transitions = {}, currentState, animationStates = this;
+        var states= {}, transitions = {}, currentState, stateExit = {}, stateEnter = {}, animationStates = this;
 
         animationStates.addState = function(name, animation) {
             if (states[name]) {
@@ -20,6 +20,30 @@ window.SJ.module('animationstates', function(sj) {
             for (var name in data) {
                 animationStates.addState(name, data[name]);
             }
+        };
+
+        animationStates.onStateExit = function(name, action) {
+            if (!states[name]) {
+                throw new Error("Animation state with name '" + name + "' doesn't exists");
+            }
+
+            stateExit[name] = action;
+        };
+
+        animationStates.detachStateExit = function(name, action) {
+            delete stateExit[name];
+        };
+
+        animationStates.onStateEnter = function(name) {
+            if (!states[name]) {
+                throw new Error("Animation state with name '" + name + "' doesn't exists");
+            }
+
+            stateEnter[name] = action;
+        };
+
+        animationStates.detachStateEnter = function(name) {
+            delete stateEnter[name];
         };
 
         animationStates.addTransition = function(fromState, toState) {
@@ -44,7 +68,16 @@ window.SJ.module('animationstates', function(sj) {
             if (!states[name]) {
                 throw new Error("Animation state with name '" + name + "' doesn't exist");
             }
+
+            if (stateExit[currentState]) {
+                stateExit[name]();
+            }
+
             currentState = name;
+
+            if (stateEnters[currentState]) {
+                stateExit[name]();
+            }
 
             states[name].setCurrentFrame(frame || 0);
         };
