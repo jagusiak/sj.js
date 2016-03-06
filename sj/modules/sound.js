@@ -2,27 +2,24 @@ window.SJ.module('sound', function(sj) {
     "use strict";
 
     var config = sj.config("sound", "sounds"),
-        sounds = {};
-
-
-    function SJSound() {
+        sounds = {},
+    SJSound = function() {
         var instance = this;
         instance.play = function() {
             instance.sound.currentTime = 0;
             instance.sound.play();
         };
-    }
-
-    for (var name in config) {
-        sounds[name] = new SJSound();
-        sounds[name].name = name;
-    }
-
-    function exists(name) {
+    },
+    exists = function (name) {
         if (!config[name]) {
             throw new Error("Sound '" + name + "' not defined!");
         }
         return true;
+    };
+
+    for (var name in config) {
+        sounds[name] = new SJSound();
+        sounds[name].name = name;
     }
 
     return {

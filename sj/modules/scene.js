@@ -1,7 +1,7 @@
 window.SJ.module('scene', function (sj) {
     "use strict";
 
-    function SJScene(render, data) {
+    var SJScene = function(render, data) {
         var scene = this;
         scene.objects = {};
         scene.sounds = {};
@@ -129,7 +129,7 @@ window.SJ.module('scene', function (sj) {
                 sj.texture.load(data.textures[j]);
             }
         }
-    }
+    };
 
     return {
         /**

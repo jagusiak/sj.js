@@ -8,12 +8,8 @@ window.SJ.module('canvas', function(sj) {
         runThread = false, // determines if thread is running
         render, // renderer object
         element = document.getElementById(sj.config('canvas', 'canvas_id')), // canvas html element (DOM)
-        loaderName = sj.config('canvas', 'loader') || 'loader';
-
-    /**
-     * Thread function -  it is run in loop
-     */
-    function run() {
+        loaderName = sj.config('canvas', 'loader') || 'loader',
+        run = function() {
         // current time
         var time = (new Date()).getMilliseconds();
         // run if scene is selected
