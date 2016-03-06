@@ -2,22 +2,19 @@ window.SJ.module('texture', function(sj) {
     "use strict";
 
     var config = sj.config("texture", "textures"),
-        textures = {};
-
-
-    function SJTexture() {
-    }
-
-    for (var name in config) {
-        textures[name] = new SJTexture();
-        textures[name].name = name;
-    }
-
-    function exists(name) {
+        textures = {},
+    SJTexture = function() {
+    },
+    exists = function(name) {
         if (!config[name]) {
             throw new Error("Texture '" + name + "' not defined!");
         }
         return true;
+    };
+
+    for (var name in config) {
+        textures[name] = new SJTexture();
+        textures[name].name = name;
     }
 
     return {

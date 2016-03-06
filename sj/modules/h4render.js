@@ -1,49 +1,45 @@
 window.SJ.module('h4render', function (sj) {
     "use strict";
 
-    var canvas, width, height, ratioX, ratioY;
-
+    var canvas, width, height, ratioX, ratioY,
     /**
      * Set object position
      *
      * @param {CanvasObject} object
      */
-    function setPosition(object) {
+    setPosition = function (object) {
         var div = object.rh4;
         div.style.top = ratioY * (object.y - object.height/2) + "px";
         div.style.left = ratioX * (object.x - object.width/2) + "px";
         div.style.zIndex = object.z | 1;
         object.translated = false;
-    }
-
+    },
     /**
      * Sets object dimension
      *
      * @param {CanvasObject} object
      */
-    function setDimension(object) {
+    setDimension = function(object) {
         var div = object.rh4;
         div.style.width = ratioX * object.width + "px";
         div.style.height = ratioY * object.height + "px";
         object.scaled = false;
-    }
-
+    },
     /**
      * Sets object rotation
      *
      * @param {CanvasObject} object
      */
-    function setRotation(object) {
+    setRotation = function(object) {
         object.rh4.style.transform = 'rotate(' + object.rotation + 'rad)';
         object.rotated = false;
-    }
-
+    },
     /**
      * Sets object texture
      *
      * @param {CanvasObject} object
      */
-    function setTexture(object) {
+    setTexture = function(object) {
         var bgWidth = 100.0 / (object.textureRight - object.textureLeft),
                 bgHeight = 100.0 / (object.textureBottom - object.textureTop),
                 div = object.rh4,
@@ -53,17 +49,16 @@ window.SJ.module('h4render', function (sj) {
         div.style.backgroundSize = bgWidth + "% " + bgHeight + "%";
         div.style.backgroundPosition = posX + "% " + posY + "%";
         object.textured = false;
-    }
-
+    },
     /**
      * Sets object visibility
      *
      * @param {CanvasObject} object
      */
-    function setVisibility(object) {
+    setVisibility = function(object) {
         object.rh4.style.display = object.visible ? 'block' : 'none';
         object.rotated = false;
-    }
+    };
 
     return {
         /**
