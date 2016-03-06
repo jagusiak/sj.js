@@ -8,7 +8,8 @@ window.SJ.module('animation', function(sj) {
             currentFrame = 0,
             frames = [],
             loopped = true,
-            stopped = false;
+            stopped = false,
+            onFrame = {};
 
         animation.addFrame = function(texture, left, top, right, bottom) {
             frames.push({
@@ -18,6 +19,29 @@ window.SJ.module('animation', function(sj) {
                 right: right,
                 bottom: bottom
             });
+        };
+
+        animation.addFrames = function(frames) {
+            for (var i in frames) {
+                var frame = frames[i];
+                animation.addFrame(frame.texture, frame.left, frame.top, frame.right, frame.bottom);
+            }
+        };
+
+        animation.onFrame = function(frameNumber, action) {
+            if (frameNumber < 0 || frameNumber >= frames.length) {
+                onFrame[frameNumber] = action;
+            }
+        };
+
+        animation.detachFrame = function(frameNumber) {
+            delete onFrame[frameNumber];
+        };
+
+        animation.detachAll = function() {
+            for (var i = 0;  i < frames.length; i++) {
+                animation.detachFrame(i);
+            }
         };
 
         animation.setStep = function (s) {
