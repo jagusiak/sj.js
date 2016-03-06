@@ -34,6 +34,12 @@ window.SJ.module('animationstates', function(sj) {
             delete stateExit[name];
         };
 
+        animationStates.detachAllStateExit = function() {
+            for (var name in stateExit) {
+                animationStates.detachStateExit(name);
+            }
+        };
+
         animationStates.onStateEnter = function(name) {
             if (!states[name]) {
                 throw new Error("Animation state with name '" + name + "' doesn't exists");
@@ -44,6 +50,12 @@ window.SJ.module('animationstates', function(sj) {
 
         animationStates.detachStateEnter = function(name) {
             delete stateEnter[name];
+        };
+
+        animationStates.detachAllStateEnter = function() {
+            for (var name in stateEnter) {
+                animationStates.detachStateEnter(name);
+            }
         };
 
         animationStates.addTransition = function(fromState, toState) {
