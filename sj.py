@@ -10,6 +10,7 @@ from collections import OrderedDict
 print("SJ Manager v.0.0.1\nauthor: Seweryn Jagusiak\nsite: https://github.com/jagusiak/sj.js\n\n")
 
 appName = 'app'
+setting = 'full'
 action = 'help'
 
 if len(sys.argv) > 1:
@@ -18,12 +19,15 @@ if len(sys.argv) > 1:
 if len(sys.argv) > 2:
     appName = sys.argv[2]
 
+if len(sys.argv) > 3:
+    setting = sys.argv[3]
+
 
 def merge():
 
     # load settings
     def loadSettings():
-        global appName
+        global appName, setting
 
         def mergeDict(merged, local) :
             for key in local:
@@ -33,7 +37,7 @@ def merge():
                 else:
                     merged[key] = element
 
-        with open('sj/settings.json') as data_file:
+        with open('sj/settings-' + setting + '.json') as data_file:
             settingsData = json.load(data_file, object_pairs_hook=OrderedDict)
 
         with open(appName + '/settings.json') as data_file:

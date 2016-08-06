@@ -10,7 +10,7 @@
 (function(sj) {
     "use strict";
 
-    var settings = /* MSJ S# */sj.json.load('sj/settings.json')/* MSJ #S */,
+    var settings = /* MSJ S# */sj.json.load('sj/settings-' + sj.getSettings() + '.json')/* MSJ #S */,
         localSettings = /* MSJ L# */ sj.json.load(sj.getApp() + '/settings.json')/* MSJ L# */,
         updateRecursive = function(merged, local) {
         for (var index in local) {

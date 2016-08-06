@@ -93,10 +93,12 @@ window.SJ = (function () {
      * name as appName.
      *
      * @param {String} appName
+     * @param {String} settings Setting type: 'base' or 'full'
      * @returns {Boolean}
      */
-    function init(appName) {
+    function init(appName, settings) {
         app = (!appName ? 'app' : appName);
+        app = (!settings ? 'full' : settings);
         //<-- INIT START
         for (var file in core) {
             script.load(core[file]);
@@ -109,6 +111,7 @@ window.SJ = (function () {
         init: init,
         script : script,
         json : json,
-        getApp : function() { return app; }
+        getApp : function() { return app; },
+        getSettings : function() { return settings; }
     };
 }());

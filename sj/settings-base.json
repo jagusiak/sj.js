@@ -1,0 +1,10 @@
+{
+    "configuration": {
+    },
+    "modules" : {
+    },
+    "init" : {
+        "module" : "default",
+        "action" : "start"
+    }
+}
