@@ -5,9 +5,9 @@ window.SJ.module('canvasobject', function (sj) {
      * Creates scene object - main element of display
      *
      * @param {String} name Object name (identifier, unique per scene)
-     * @returns {CanvasObject}
+     * @returns {SJCanvasObject}
      */
-    function CanvasObject(name) {
+    function SJCanvasObject(name) {
         var object = this;
         // set identifier (name)
         this.name = name;
@@ -99,10 +99,10 @@ window.SJ.module('canvasobject', function (sj) {
          * Return new object
          *
          * @param {String} name Object name
-         * @returns {CanvasObject}
+         * @returns {SJCanvasObject}
          */
         create: function (name) {
-            return new CanvasObject(name);
+            return new SJCanvasObject(name);
         }
     };
 });

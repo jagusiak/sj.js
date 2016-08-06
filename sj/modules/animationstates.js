@@ -87,7 +87,7 @@ window.SJ.module('animationstates', function(sj) {
 
             currentState = name;
 
-            if (stateEnters[currentState]) {
+            if (stateEnter[currentState]) {
                 stateExit[name]();
             }
 

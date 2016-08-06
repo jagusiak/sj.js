@@ -1,0 +1,11 @@
+{
+    "modules": {
+        "test_hittest": "APP_NAME/modules/test_hittest"
+    },
+    "configuration": {
+    },
+    "init": {
+        "module": "test_hittest",
+        "action": "init"
+    }
+}

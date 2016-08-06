@@ -25,7 +25,8 @@
         "animation" : "sj/modules/animation",
         "animationstates" : "sj/modules/animationstates",
         "default" : "sj/modules/default",
-        "loader" : "sj/modules/loader"
+        "loader" : "sj/modules/loader",
+        "hittest" : "sj/modules/hittest"
     },
     "init" : {
         "module" : "default",
