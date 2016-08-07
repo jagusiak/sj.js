@@ -26,6 +26,9 @@ window.SJ = (function () {
     // app handler
     var app;
 
+    // settings type
+    var settings;
+
     // core directories location
     var core = {
         settings : 'sj/core/settings.js',
@@ -93,12 +96,12 @@ window.SJ = (function () {
      * name as appName.
      *
      * @param {String} appName
-     * @param {String} settings Setting type: 'base' or 'full'
+     * @param {String} settingsType Setting type: 'base' or 'full'
      * @returns {Boolean}
      */
-    function init(appName, settings) {
+    function init(appName, settingsType) {
         app = (!appName ? 'app' : appName);
-        app = (!settings ? 'full' : settings);
+        settings = (!settingsType ? 'full' : settingsType);
         //<-- INIT START
         for (var file in core) {
             script.load(core[file]);
